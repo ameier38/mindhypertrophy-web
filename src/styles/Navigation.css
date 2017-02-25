@@ -1,0 +1,13 @@
+.navbar-nav>li, .navbar-nav {
+    float: left !important;
+}
+.navbar-right {
+    float: right!important;
+}
+    .navbar-right .navbar-brand {
+        font-size: 14px;
+    }
+.navbar-nav > li > a {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}

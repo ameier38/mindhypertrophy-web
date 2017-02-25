@@ -1,0 +1,31 @@
+.Card {
+  background-color: #ffffff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #d8d8d8;
+  border-top-width: 0;
+  border-bottom-width: 2px;
+}
+.Card.clickable:focus, .Card.clickable:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  margin-left:-2px;
+}
+
+    .Card .content {
+        padding: 20px 20px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+        .Card .content h1, h2, h3, h4, h5, h6{
+            color: #999999;
+        }
+        .Card .content span.first-inline p:first-child { display: inline }
+        .Card .content span.last-inline p:last-child { display: inline }
+    .Card .TagContainer button:hover{
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }

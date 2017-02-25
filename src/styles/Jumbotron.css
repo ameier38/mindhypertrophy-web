@@ -1,0 +1,12 @@
+.Jumbotron {
+    background-size: cover;
+    background-color: #999999;
+    color: #ffffff;
+}
+    .Jumbotron img{
+        float: left;
+        padding: 5px;
+        margin-right: 5px;
+        height: 100px;
+        width: auto;
+    }

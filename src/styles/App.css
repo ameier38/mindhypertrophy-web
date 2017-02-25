@@ -1,0 +1,127 @@
+#page-container{
+    background-color: #e5e5e5;
+    margin-top: 50px;
+}
+
+.navbar-nav>li, .navbar-nav {
+    float: left !important;
+}
+.navbar-right {
+    float: right!important;
+}
+    .navbar-right .navbar-brand {
+        font-size: 14px;
+    }
+.navbar-nav > li > a {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+#view-container{
+    min-height: 100vh;
+}
+.jumbotron {
+    background-size: cover;
+    background-color: #999999;
+    color: #ffffff;
+}
+    .jumbotron img{
+        float: left;
+        padding: 5px;
+        margin-right: 5px;
+        height: 100px;
+        width: auto;
+    }
+#tag-filter{
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: auto;
+}
+#tag-filter.show-sidebar{
+    background-color: none;      
+}
+#footer {
+    color: #999999;
+    border-top: 1px solid #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+    #footer a{
+        color: #999999;
+        margin-left: 10px;
+    }
+    #footer a:hover {
+        color:#000;
+        text-decoration:none;
+        cursor: pointer;
+    }
+    #footer .row div[class^="col-"]:last-child{
+        text-align: right;
+    }
+.card {
+  background-color: #ffffff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #d8d8d8;
+  border-top-width: 0;
+  border-bottom-width: 2px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+    .card.clickable:focus, .card.clickable:hover {
+            color: #555;
+            text-decoration: none;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            margin-left:-2px;
+        }
+    .card .card-header {
+        position: relative;
+        display: block;
+        padding: 10px 20px;
+        border-bottom: 1px solid #e5e5e5;      
+    }
+        .card .card-header .card-header-title{
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        .card .card-header .card-header-date {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .card .card-summary {
+            padding: 20px;
+        }
+    .card .card-content {
+        padding: 20px 20px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+        .card .card-content h1, h2, h3, h4, h5, h6{
+            color: #999999;
+        }
+        .card .card-content span.first-inline p:first-child { display: inline }
+        .card .card-content span.last-inline p:last-child { display: inline }
+    .card .tag-container button:hover{
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+.tag-container {
+    padding: 5px 10px;
+}
+.tag{
+    background-color:#999999;
+}
+.tag-container button{
+    margin: 5px;
+}
