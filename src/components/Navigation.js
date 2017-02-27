@@ -6,7 +6,7 @@ import '../styles/Navigation.css';
 class Navigation extends Component{
     render(){
         return(
-            <div id="navigation">
+            <div className="navigation">
                 <Navbar fixedTop inverse >
                     <Nav pullLeft>
                         <Navbar.Brand>

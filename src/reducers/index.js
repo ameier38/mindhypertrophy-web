@@ -1,12 +1,18 @@
 import { combineReducers } from 'redux'
-import cardDetail from './cardDetail'
-import cardFilter from './cardFilter'
+import { routerReducer } from 'react-router-redux'
+import selectedTag from './selectedTag'
+import selectedCard from './selectedCard'
 
-const cardReducer = (state = {}, action) => {
-    return {
-        cardFilter: cardFilter(state.cardFilter, action),
-        cardDetail: cardDetail(state.cardDetail, action)
-    }
-}
+/**
+ * The root reducer which combines all the
+ * reducers for the application. `combineReducers`
+ * will map the state property corresponding to the 
+ * name of the reducer.
+ */
+const rootReducer = combineReducers({
+    selectedTag,
+    selectedCard,
+    routing: routerReducer
+})
 
-export default cardReducer
+export default rootReducer

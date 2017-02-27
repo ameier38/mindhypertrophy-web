@@ -1,29 +1,29 @@
-import { REQUEST_CARD_DETAIL, RECEIVE_CARD_DETAIL } from '../actions'
+import { REQUEST_ALL_TAGS, RECEIVE_ALL_TAGS } from '../actions'
 
 const default_state = {
     isFetching: false,
     requestedAt: null,
     receivedAt: null,
-    item: {}
+    items: []
 }
-const cardDetail = (state = default_state, action) => {
+const tags = (state = default_state, action) => {
     switch (action.type) {
-        case REQUEST_CARD_DETAIL:
+        case REQUEST_ALL_TAGS:
             return {
                 ...state, 
                 isFetching: true,
                 requestedAt: action.requestedAt
             }
-        case RECEIVE_CARD_DETAIL:
+        case RECEIVE_ALL_TAGS:
             return {
                 ...state, 
                 isFetching: false, 
                 receivedAt: action.receivedAt,
-                item: action.item
+                items: action.items
             }
         default:
             return state
     }
 }
 
-export default cardDetail
+export default tags

@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-import { Grid, Row, Col } from 'react-bootstrap';
-import { ThreeBounce } from 'better-react-spinkit';
-import Jumbotron from './Jumbotron';
-import Card from './Card';
-import TagFilter from './TagFilter';
-import isEmpty from 'lodash/isEmpty';
+import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
+import { Grid, Row, Col } from 'react-bootstrap'
+import { ThreeBounce } from 'better-react-spinkit'
+import CardView from './CardView'
+import Jumbotron from './Jumbotron'
+import Card from './Card'
+import TagFilter from './TagFilter'
+import isEmpty from 'lodash/isEmpty'
 
- const cardApi = process.env.REACT_APP_CARD_API;
- const tagApi = process.env.REACT_APP_TAG_API;
+const cardApi = process.env.REACT_APP_CARD_API;
+const tagApi = process.env.REACT_APP_TAG_API;
 
 class CardContainer extends Component{
     constructor(props) {
         super(props)
-        this.state = { 
-            cards: [],
-            tags: [],
-            loading: true
-        }
         this.updateData = this.updateData.bind(this)
         this.loadFromServer = this.loadFromServer.bind(this)
     }
@@ -79,35 +75,12 @@ class CardContainer extends Component{
         }.bind(this));
         if (this.state.loading){
             return (
-                <div className="card-container">
-                    <Jumbotron title="Loading..." />
-                    <Grid>
-                        <Row>
-                            <Col xs={12}>
-                                <ThreeBounce size={50}/>
-                            </Col>
-                        </Row> 
-                    </Grid>
-                </div>    
+                <Loa
             ) 
         }
         else {
             return(
-                <div className="card-container">
-                    <Jumbotron
-                        title="Train your brain"
-                        description="Give your brain a workout! Click an article below to learn more."
-                        imageUrl="/images/neurons.jpg" 
-                        includeLogo={true} />
-                    <TagFilter 
-                        tags={this.state.tags}
-                        onClick={this.handleClick} />
-                    <Grid>
-                        <Row>
-                            {cardNodes}
-                        </Row> 
-                    </Grid>
-                </div>
+                <CardView />
             )
         }
         

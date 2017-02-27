@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
-import '../styles/CardSummary.css';
+import React, { PropTypes } from 'react'
+import '../styles/CardSummary.css'
 
-const CardSummary = ({content}) => (
+const CardSummary = ({summary}) => (
     <div className="CardSummary">
-        <p>{content}</p>
+        <p>{summary}</p>
     </div>
 );
 CardSummary.propTypes = {
-    content: PropTypes.string.isRequired
+    summary: PropTypes.string.isRequired
 }
 
 export default CardSummary;
