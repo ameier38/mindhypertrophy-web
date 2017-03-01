@@ -31,10 +31,10 @@ export const requestAllTags = () => ({
     requestedAt: Date.now()
 })
 
-export const receiveAllTags = (json) => ({
+export const receiveAllTags = (tags) => ({
     type: RECEIVE_ALL_TAGS,
     receivedAt: Date.now(),
-    items: json.map(
+    items: tags.map(
         tag => ({id: tag.Id, name: tag.Name})
     )
 })
@@ -44,22 +44,26 @@ export const requestAllCards = () => ({
     requestedAt: Date.now()
 })
 
-export const receiveAllCards = (json) => ({
-    type: RECEIVE_ALL_CARDS,
-    receivedAt: Date.now(),
-    items: json.map(
-        card => ({
-            id: card.Id,
-            slug: card.Slug,
-            title: card.Title,
-            summary: card.Summary,
-            createdDate: card.CreatedDate,
-            tags: card.Tags.map(
-                tag => ({id: tag.Id, name: tag.Name})
-            )
-        })
-    )
-})
+export const receiveAllCards = (cards) => {
+    console.log("receiveAllCards:")
+    console.log(cards)
+    return({
+        type: RECEIVE_ALL_CARDS,
+        receivedAt: Date.now(),
+        items: cards.map(
+            card => ({
+                id: card.Id,
+                slug: card.Slug,
+                title: card.Title,
+                summary: card.Summary,
+                createdDate: card.CreatedDate,
+                tags: card.Tags.map(
+                    tag => ({id: tag.Id, name: tag.Name})
+                )
+            })
+        )
+    })
+}
 
 export const requestCardDetail = (slug) => ({
     type: REQUEST_CARD_DETAIL,
@@ -67,17 +71,17 @@ export const requestCardDetail = (slug) => ({
     requestedAt: Date.now()
 })
 
-export const receiveCardDetail = (json) => ({
+export const receiveCardDetail = (card) => ({
     type: RECEIVE_CARD_DETAIL,
     receivedAt: Date.now(),
     item: {
-        id: json.Id,
-        slug: json.Slug,
-        title: json.Title,
-        imageUrl: json.ImageUrl,
-        createdDate: json.CreatedDate,
-        content: json.Content,
-        tags: json.Tags.map(
+        id: card.Id,
+        slug: card.Slug,
+        title: card.Title,
+        imageUrl: card.ImageUrl,
+        createdDate: card.CreatedDate,
+        content: card.Content,
+        tags: card.Tags.map(
             tag => ({id: tag.Id, name: tag.Name})
         )
     }
@@ -87,7 +91,8 @@ export const fetchAllCards = () => {
     return dispatch => {
         dispatch(requestAllCards())
         return fetch(cardApi)
-            .then(response => dispatch(receiveAllCards(response)))
+            .then(response => response.json())
+            .then(cards => dispatch(receiveAllCards(cards)))
     }
 }
 
@@ -95,7 +100,8 @@ export const fetchCardDetail = (slug) => {
     return dispatch => {
         dispatch(requestCardDetail(slug))
         return fetch(`${cardApi}/articles/${slug}`)
-            .then(response => dispatch(receiveCardDetail(response)))
+            .then(response => response.json())
+            .then(card => dispatch(receiveCardDetail(card)))
     }
 }
 
@@ -103,6 +109,7 @@ export const fetchAllTags = () => {
     return dispatch => {
         dispatch(requestAllTags())
         return fetch(tagApi)
-            .then(response => dispatch(receiveAllTags(response)))
+            .then(response => response.json())
+            .then(tags => dispatch(receiveAllTags(tags)))
     }
 }

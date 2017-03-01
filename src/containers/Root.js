@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from '../configureStore'
 import initial_state from '../initial_state.json'
 import App from '../components/App'
-import CardViewContainer from '../containers/CardContainer'
+import CardViewContainer from '../containers/CardViewContainer'
 import AboutView from '../components/AboutView'
 import ContactView from '../components/ContactView'
 import DetailViewContainer from '../containers/DetailViewContainer'
@@ -17,7 +18,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 store.dispatch(fetchAllCards())
 store.dispatch(fetchAllTags())
 
-const Root = ({store}) => (
+const Root = () => (
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
@@ -30,9 +31,5 @@ const Root = ({store}) => (
         </Router>
     </Provider>
 )
-
-Root.propTypes = {
-    store: PropTypes.object.isRequired
-}
 
 export default Root

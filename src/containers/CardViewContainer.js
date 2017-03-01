@@ -1,16 +1,20 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import CardView from './CardView'
+import CardView from '../components/CardView'
 import { selectTag, selectCard } from '../actions'
 
 const getVisibleCards = (cards, selectedTag) => {
-    return cards.filter(
-        card => {
-            return card.tags.some(
-                tag => tag.id === selectedTag
-            )
-        }
-    )
+    if (selectTag === "All"){
+        return cards
+    }
+    else {
+        return cards.filter(
+            card => {
+                return card.tags.some(
+                    tag => tag.id === selectedTag
+                )
+            }
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({

@@ -1,4 +1,4 @@
-import { REQUEST_ALL_CARDS, RECEIVE_ALL_CARDS, SELECT_TAG } from '../actions'
+import { REQUEST_ALL_CARDS, RECEIVE_ALL_CARDS } from '../actions'
 
 const default_state = {
     isFetching: false,

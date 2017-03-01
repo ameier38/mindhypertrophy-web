@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { Col } from 'react-bootstrap';
+import React, { PropTypes } from 'react'
+import { Col } from 'react-bootstrap'
 import DisqusThread from 'react-disqus-thread'
 import '../styles/Card.css'
 
@@ -21,4 +21,4 @@ CommentsCard.propTypes = {
     title: PropTypes.string.isRequired
 }
 
-export default CardComments;
+export default CommentsCard

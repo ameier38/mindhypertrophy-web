@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Grid, Row, Col, Well } from 'react-bootstrap'
+import { Grid, Well } from 'react-bootstrap'
 import TagBox from './TagBox'
 import '../styles/TagFilter.css'
 

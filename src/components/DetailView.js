@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Grid, Row } from 'react-bootstrap'
-import { ThreeBounce } from 'better-react-spinkit'
 import Jumbotron from './Jumbotron'
 import TagFilter from './TagFilter'
 import DetailCard from './DetailCard'
 import CommentsCard from './CommentsCard'
-import '../styles/CardView.css'
 
 const DetailView = ({ isFetching, card, onTagClick }) => (
     <div className="CardView">
@@ -19,7 +17,7 @@ const DetailView = ({ isFetching, card, onTagClick }) => (
         <Grid>
             <Row>
                 <DetailCard isFetching={isFetching} content={card.content} />
-                <CommentsCard identifier={detailCard.slug} title={card.title} />
+                <CommentsCard identifier={card.slug} title={card.title} />
             </Row>
         </Grid>
     </div>

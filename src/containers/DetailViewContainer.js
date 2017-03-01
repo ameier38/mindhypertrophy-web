@@ -16,9 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class DetailViewContainer extends Component {
-    constructor(props) {
-        super(props)
-    }
     componentDidMount() {
         const { requestCardDetail, route_slug } = this.props
         requestCardDetail(route_slug)

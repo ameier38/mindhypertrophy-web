@@ -14,3 +14,5 @@ const selectedCard = (state = null, action) => {
             return state
     }
 }
+
+export default selectedCard

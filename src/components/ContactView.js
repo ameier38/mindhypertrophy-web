@@ -1,4 +1,5 @@
 import React from 'react';
+import { Jumbotron, Grid, Row } from 'react-bootstrap'
 import DetailCard from './DetailCard'
 
 const content = (

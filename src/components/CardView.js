@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react'
-import '../styles/CardView.css'
+import { Jumbotron, Grid, Row } from 'react-bootstrap'
+import { ThreeBounce } from 'better-react-spinkit'
+import TagFilter from './TagFilter'
+import Card from './Card'
 
 const CardView = ({ isFetching, cards, onCardClick, tags, onTagClick }) => (
     <div className="CardView">
@@ -31,6 +34,7 @@ const CardView = ({ isFetching, cards, onCardClick, tags, onTagClick }) => (
     </div>
 )
 CardView.propTypes = {
+    isFetching: PropTypes.bool.isRequired,
     cards: PropTypes.array.isRequired,
     onCardClick: PropTypes.func.isRequired,
     tags: PropTypes.array.isRequired,
