@@ -6,10 +6,10 @@ import { SELECT_TAG } from '../actions'
  * @property {string} state - slug of currently selected Tag
  * @property {object} action - action object
  */
-const selectedTag = (state = 'all', action) => {
+const selectedTag = (state = 0, action) => {
     switch (action.type) {
         case SELECT_TAG:
-            return action.slug
+            return action.id
         default:
             return state
     }

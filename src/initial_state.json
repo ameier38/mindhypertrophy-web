@@ -34,7 +34,6 @@
         "items": [
             {
                 "id": 1,
-                "visible": true,
                 "slug": "about",
                 "createdDate": "2016-02-26",
                 "title": "About",
@@ -55,7 +54,6 @@
             {
                 "id": 2,
                 "slug": "contact",
-                "visible": false,
                 "createdDate": "2016-02-26",
                 "title": "Contact",
                 "summary": "Contact Us!",

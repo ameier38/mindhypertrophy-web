@@ -16,9 +16,9 @@ export const REQUEST_CARD_DETAIL = 'REQUEST_CARD_DETAIL'
 export const RECEIVE_CARD_DETAIL = 'RECEIVE_CARD_DETAIL'
 export const FILTER_CARDS_BY_TAG = 'FILTER_CARDS_BY_TAG'
 
-export const selectTag = (slug) => ({
+export const selectTag = (id) => ({
     type: SELECT_TAG, 
-    slug
+    id
 })
 
 export const selectCard = (slug) => ({
@@ -33,19 +33,32 @@ export const requestAllTags = () => ({
 
 export const receiveAllTags = (json) => ({
     type: RECEIVE_ALL_TAGS,
-    items: json.tags,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
+    items: json.map(
+        tag => ({id: tag.Id, name: tag.Name})
+    )
 })
 
 export const requestAllCards = () => ({
-    type: REQUEST_CARDS,
+    type: REQUEST_ALL_CARDS,
     requestedAt: Date.now()
 })
 
 export const receiveAllCards = (json) => ({
-    type: RECEIVE_CARDS,
-    items: json.cards,
-    receivedAt: Date.now()
+    type: RECEIVE_ALL_CARDS,
+    receivedAt: Date.now(),
+    items: json.map(
+        card => ({
+            id: card.Id,
+            slug: card.Slug,
+            title: card.Title,
+            summary: card.Summary,
+            createdDate: card.CreatedDate,
+            tags: card.Tags.map(
+                tag => ({id: tag.Id, name: tag.Name})
+            )
+        })
+    )
 })
 
 export const requestCardDetail = (slug) => ({
@@ -56,13 +69,18 @@ export const requestCardDetail = (slug) => ({
 
 export const receiveCardDetail = (json) => ({
     type: RECEIVE_CARD_DETAIL,
-    item: json.cardDetail,
-    receivedAt: Date.now()
-})
-
-export const filterCardsByTag = (tagName) => ({
-    type: FILTER_CARDS_BY_TAG,
-    tagName
+    receivedAt: Date.now(),
+    item: {
+        id: json.Id,
+        slug: json.Slug,
+        title: json.Title,
+        imageUrl: json.ImageUrl,
+        createdDate: json.CreatedDate,
+        content: json.Content,
+        tags: json.Tags.map(
+            tag => ({id: tag.Id, name: tag.Name})
+        )
+    }
 })
 
 export const fetchAllCards = () => {

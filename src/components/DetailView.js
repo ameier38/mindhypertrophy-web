@@ -1,24 +1,25 @@
 import React, { PropTypes } from 'react'
 import { Grid, Row } from 'react-bootstrap'
+import { ThreeBounce } from 'better-react-spinkit'
 import Jumbotron from './Jumbotron'
 import TagFilter from './TagFilter'
 import DetailCard from './DetailCard'
 import CommentsCard from './CommentsCard'
 import '../styles/CardView.css'
 
-const DetailView = ({ isFetching, detailCard, onTagClick }) => (
+const DetailView = ({ isFetching, card, onTagClick }) => (
     <div className="CardView">
         <Jumbotron
-            title={detailCard.title}
-            description={detailCard.summary}
-            imageUrl={detailCard.imageUrl} />
+            title={isFetching ? 'Loading...' : card.title}
+            description={isFetching ? null : card.summary}
+            imageUrl={isFetching ? null : card.imageUrl} />
         <TagFilter 
-            tags={detailCard.tags}
+            tags={isFetching ? [] : card.tags}
             onClick={onTagClick} />
         <Grid>
             <Row>
-                <DetailCard isFetching={isFetching} content={detailCard.content} />
-                <CommentsCard identifier={detailCard.slug} title={detailCard.title} />
+                <DetailCard isFetching={isFetching} content={card.content} />
+                <CommentsCard identifier={detailCard.slug} title={card.title} />
             </Row>
         </Grid>
     </div>
@@ -26,7 +27,7 @@ const DetailView = ({ isFetching, detailCard, onTagClick }) => (
 
 DetailView.propTypes = {
     isFetching: PropTypes.bool.isRequired,
-    detailCard: PropTypes.object.isRequired,
+    card: PropTypes.object.isRequired,
     onTagClick: PropTypes.func.isRequired
 }
 

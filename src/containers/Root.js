@@ -3,15 +3,19 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from '../configureStore'
 import initial_state from '../initial_state.json'
-import App from './components/App'
-import CardContainer from './components/CardContainer'
-import AboutView from './components/AboutView'
-import ContactView from './components/ContactView'
-import CardDetail from './components/CardDetail'
-import NotFound from './components/NotFound'
+import App from '../components/App'
+import CardViewContainer from '../containers/CardContainer'
+import AboutView from '../components/AboutView'
+import ContactView from '../components/ContactView'
+import DetailViewContainer from '../containers/DetailViewContainer'
+import NotFound from '../components/NotFound'
+import { fetchAllCards, fetchAllTags } from '../actions'
 
 const store = configureStore(initial_state)
 const history = syncHistoryWithStore(browserHistory, store)
+
+store.dispatch(fetchAllCards())
+store.dispatch(fetchAllTags())
 
 const Root = ({store}) => (
     <Provider store={store}>

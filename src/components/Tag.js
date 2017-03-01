@@ -1,18 +1,15 @@
-import React, { PropTypes } from 'react';
-import { Button } from 'react-bootstrap';
-import '../styles/Tag.css';
+import React, { PropTypes } from 'react'
+import { Button } from 'react-bootstrap'
 
-const Tag = ({tagId, tagName, onClick}) => {
-    const queryPath = { pathname: "/", query: { tagId: tagId }}
-    const style = (tagId === 1) ? "primary" : "default"
+const Tag = ({name, onTagClick}) => {
+    const style = (name === "All") ? "primary" : "default"
     return (
-        <Button bsSize="xsmall" bsStyle={style} onClick={onClick.bind(this,queryPath)}>{tagName}</Button>
+        <Button bsSize="xsmall" bsStyle={style} onClick={onTagClick}>{name}</Button>
     )
 }
 Tag.PropTypes = {
-    tagId: PropTypes.number.isRequired,
-    tagName: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    name: PropTypes.string.isRequired,
+    onTagClick: PropTypes.func.isRequired
 }
 
-export default Tag;
+export default Tag

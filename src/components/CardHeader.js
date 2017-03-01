@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import '../styles/CardHeader.css';
 
-class CardHeader extends Component {
-    render() {
-        <div className="Header">
-            <h3 className="title">{this.props.title}</h3>
-            <span className="date">{this.props.createdDate}</span>
-        </div>
-    }
+const CardHeader = ({title, createdDate}) => (
+    <div className="CardHeader">
+        <h3 className="title">{title}</h3>
+        <span className="date">{createdDate}</span>
+    </div>
+)
+CardHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+    createdDate: PropTypes.string.isRequired
 }
 
-export default CardHeader;
+export default CardHeader

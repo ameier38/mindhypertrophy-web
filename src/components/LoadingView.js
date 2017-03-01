@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { Jumbotron, Grid, Row, Col } from 'react-bootstrap'
+import { ThreeBounce } from 'better-react-spinkit'
 
 const LoadingCardView = () => (
     <div className="CardView">

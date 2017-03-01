@@ -2,6 +2,10 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import selectedTag from './selectedTag'
 import selectedCard from './selectedCard'
+import cards from './cards'
+import tags from './tags'
+import cardDetail from './cardDetail'
+
 
 /**
  * The root reducer which combines all the
@@ -12,6 +16,9 @@ import selectedCard from './selectedCard'
 const rootReducer = combineReducers({
     selectedTag,
     selectedCard,
+    cards,
+    tags,
+    cardDetail,
     routing: routerReducer
 })
 
