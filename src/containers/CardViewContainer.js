@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import CardView from '../components/CardView'
 import { selectTag, selectCard } from '../actions'
+import { push } from 'react-router-redux'
 
 const getVisibleCards = (cards, selectedTag) => {
-    if (selectTag === "All"){
+    if (selectedTag === "All"){
         return cards
     }
     else {
@@ -17,15 +18,21 @@ const getVisibleCards = (cards, selectedTag) => {
     }
 }
 
+const onCardClick = (dispatch, slug) => {
+    dispatch(selectCard(slug))
+    console.log(`pushing url: /articles/${slug}`)
+    dispatch(push(`/articles/${slug}`))
+}
+
 const mapStateToProps = (state) => ({
     isFetching: state.cards.isFetching,
     tags: state.tags.items,
     cards: getVisibleCards(state.cards.items, state.selectedTag)
-})
+}) 
 
 const mapDispatchToProps = (dispatch) => ({
-    onTagClick: (slug) => dispatch(selectTag(slug)),
-    onCardClick: (slug) => dispatch(selectCard(slug))
+    onTagClick: slug => dispatch(selectTag(slug)),
+    onCardClick: slug => onCardClick(dispatch, slug)
 })
 
 const CardViewContainer = connect(

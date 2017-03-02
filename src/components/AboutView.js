@@ -1,10 +1,12 @@
 import React from 'react';
-import { Jumbotron, Grid, Row } from 'react-bootstrap'
-import DetailCard from './DetailCard'
+import { Grid, Row, Col } from 'react-bootstrap'
 import CommentsCard from './CommentsCard'
+import Banner from './Banner'
+import '../styles/CardView.css'
+import '../styles/CardContent.css'
 
 const content = (
-    <div>
+    <div className="CardContent">
         <blockquote>
             <p>
                 <i>Hypertrophy:</i> excessive development of an organ or part; 
@@ -42,13 +44,17 @@ const content = (
 
 const AboutView = () => (
     <div className="CardView">
-        {/*TODO: update description*/}
-        <Jumbotron
-            title="About"
-            description="A blog built using React framework" />
+        <Banner 
+            includeLogo={true}
+            title={"About"}
+            description={"A blog to help us learn."} />
         <Grid>
             <Row>
-                <DetailCard isFetching={false} content={content} />
+                <Col xs={12}>
+                    <div className="Card">
+                        {content}
+                    </div>
+                </Col>
                 <CommentsCard identifier={"about"} title={"About"} />
             </Row>
         </Grid>

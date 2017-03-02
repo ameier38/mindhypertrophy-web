@@ -1,20 +1,20 @@
 .Card {
   background-color: #ffffff;
+  position: relative;
   margin-top: 5px;
   margin-bottom: 5px;
   border: 1px solid #d8d8d8;
   border-top-width: 0;
   border-bottom-width: 2px;
+  border-radius: 3px;
+  box-shadow: none;
+  box-sizing: border-box;
 }
-.Card.clickable:focus, .Card.clickable:hover {
-  color: #555;
-  text-decoration: none;
-  background-color: #f5f5f5;
+.Card.stub:focus, .Card.stub:hover {
+  transform: scale(1.01);
   cursor: pointer;
-  margin-left:-2px;
 }
-    .Card .TagContainer button:hover{
-        color: #333;
-        background-color: #fff;
-        border-color: #ccc;
-    }
+.Card.stub {
+  height: 30vh;
+  overflow: hidden;
+}

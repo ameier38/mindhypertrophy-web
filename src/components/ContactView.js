@@ -1,9 +1,11 @@
 import React from 'react';
-import { Jumbotron, Grid, Row } from 'react-bootstrap'
-import DetailCard from './DetailCard'
+import { Grid, Row, Col } from 'react-bootstrap'
+import Banner from './Banner'
+import '../styles/CardView.css'
+import '../styles/CardContent.css'
 
 const content = (
-    <div>
+    <div className="CardContent">
         <p>
             Use below links for appropriate contact.
         </p>
@@ -16,12 +18,17 @@ const content = (
 
 const ContactView = () => (
     <div className="CardView">
-        <Jumbotron
-            title="Contact"
-            description="Something to say?" />
+        <Banner 
+            includeLogo={true}
+            title={"Contact"}
+            description={"Something to say?"} />
         <Grid>
             <Row>
-                <DetailCard isFetching={false} content={content} />
+                <Col xs={12}>
+                    <div className="Card">
+                        {content}
+                    </div>
+                </Col>
             </Row>
         </Grid>
     </div>

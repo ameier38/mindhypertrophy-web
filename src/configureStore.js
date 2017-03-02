@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
+import { routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from './reducers'
-
-const loggerMiddleware = createLogger()
 
 /**
  * Configure the data store for the application.
@@ -15,7 +15,8 @@ const configureStore = (preloadedState) => {
         preloadedState,
         applyMiddleware(
             thunkMiddleware,
-            loggerMiddleware
+            routerMiddleware(browserHistory),
+            createLogger()
         )
     )
 }

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import DetailView from '../components/DetailView'
 import LoadingView from '../components/LoadingView'
 import { connect } from 'react-redux'
-import { selectTag, requestCardDetail } from '../actions'
+import { selectTag, requestCardDetail, fetchCardDetail } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
     route_slug: ownProps.params.slug,
@@ -12,13 +12,16 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onTagClick: slug => dispatch(selectTag(slug)),
-    requestCardDetail: slug => dispatch(requestCardDetail(slug))
+    requestCardDetail: slug => dispatch(requestCardDetail(slug)),
+    fetchCardDetail: slug => dispatch(fetchCardDetail(slug))
 })
 
 class DetailViewContainer extends Component {
     componentDidMount() {
-        const { requestCardDetail, route_slug } = this.props
+        const { requestCardDetail, fetchCardDetail, route_slug } = this.props
+        console.log(`Requesting card detail:${route_slug}`)
         requestCardDetail(route_slug)
+        fetchCardDetail(route_slug)
     }
     render() {
         const { isFetching, onTagClick, card } = this.props

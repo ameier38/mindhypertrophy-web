@@ -45,8 +45,6 @@ export const requestAllCards = () => ({
 })
 
 export const receiveAllCards = (cards) => {
-    console.log("receiveAllCards:")
-    console.log(cards)
     return({
         type: RECEIVE_ALL_CARDS,
         receivedAt: Date.now(),
@@ -99,7 +97,7 @@ export const fetchAllCards = () => {
 export const fetchCardDetail = (slug) => {
     return dispatch => {
         dispatch(requestCardDetail(slug))
-        return fetch(`${cardApi}/articles/${slug}`)
+        return fetch(`${cardApi}/${slug}`)
             .then(response => response.json())
             .then(card => dispatch(receiveCardDetail(card)))
     }

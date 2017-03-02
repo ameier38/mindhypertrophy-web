@@ -1,33 +1,31 @@
 import React, { PropTypes } from 'react'
-import { Jumbotron, Grid, Row } from 'react-bootstrap'
+import { Grid, Row } from 'react-bootstrap'
 import { ThreeBounce } from 'better-react-spinkit'
 import TagFilter from './TagFilter'
 import Card from './Card'
+import Banner from './Banner'
+import '../styles/CardView.css'
+import background from '../images/neurons.jpg'
 
 const CardView = ({ isFetching, cards, onCardClick, tags, onTagClick }) => (
     <div className="CardView">
-        <Jumbotron
-            title="Train your brain"
-            description="Give your brain a workout! Click an article below to learn more."
-            imageUrl="/images/neurons.jpg" 
-            includeLogo={true} />
+        <Banner 
+            imageUrl={background}
+            includeLogo={true}
+            title={"Train your brain"}
+            description={"Give your brain a workout! Click an article below to learn more."} />
         <TagFilter 
             tags={tags}
             onTagClick={onTagClick} />
         <Grid>
             <Row>
                 { isFetching && <ThreeBounce size={50}/> }
-                { !isFetching && cards.map(card => 
+                { !isFetching && cards.length > 0 && cards.map(card => 
                     <Card 
-                        key={card.id} 
-                        id={card.id}
-                        slug={card.slug}
-                        title={card.title} 
-                        summary={card.summary} 
-                        createdDate={card.createdDate} 
-                        tags={card.tags}
-                        onClick={onCardClick}
-                    />
+                        key={card.id}
+                        card={card} 
+                        onCardClick={() => onCardClick(card.slug)} 
+                        onTagClick={onTagClick} />
                 )}
             </Row> 
         </Grid>

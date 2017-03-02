@@ -4,3 +4,8 @@
     height: auto;
     overflow: auto;
 }
+    .TagFilter .TagBox {
+        position: relative;
+        bottom: auto;
+        left: auto;
+    }
