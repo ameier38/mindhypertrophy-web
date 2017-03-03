@@ -3,8 +3,9 @@
  */
 import fetch from 'isomorphic-fetch'
 
-const cardApi = process.env.REACT_APP_CARD_API;
-const tagApi = process.env.REACT_APP_TAG_API;
+const cardApi = `${process.env.REACT_APP_API_HOST}/api/cards`
+const tagApi = `${process.env.REACT_APP_API_HOST}/api/tags`
+
 
 export const SELECT_TAG = 'SELECT_TAG'
 export const SELECT_CARD = 'SELECT_CARD'

@@ -1,3 +1,6 @@
+# Specify the base image
+FROM node:6.10.0
+
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -13,7 +16,7 @@ COPY . /usr/src/app
 RUN npm run build
 
 # Set API host
-ENV REACT_APP_API_HOST = http://localhost:5000/api/
+ENV REACT_APP_API_HOST = http://localhost:5000
 
 # Expose port 9000 on the container
 EXPOSE 9000
