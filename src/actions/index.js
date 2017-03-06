@@ -3,9 +3,9 @@
  */
 import fetch from 'isomorphic-fetch'
 
-const cardApi = `${process.env.REACT_APP_API_HOST}/api/cards`
-const tagApi = `${process.env.REACT_APP_API_HOST}/api/tags`
-
+const host = process.env.REACT_APP_API_HOST
+const port = process.env.REACT_APP_API_PORT
+const api_url = `http://${host}:${port}/api`
 
 export const SELECT_TAG = 'SELECT_TAG'
 export const SELECT_CARD = 'SELECT_CARD'
@@ -36,7 +36,7 @@ export const receiveAllTags = (tags) => ({
     type: RECEIVE_ALL_TAGS,
     receivedAt: Date.now(),
     items: tags.map(
-        tag => ({id: tag.Id, name: tag.Name})
+        tag => ({id: tag._id, name: tag.name})
     )
 })
 
@@ -51,13 +51,13 @@ export const receiveAllCards = (cards) => {
         receivedAt: Date.now(),
         items: cards.map(
             card => ({
-                id: card.Id,
-                slug: card.Slug,
-                title: card.Title,
-                summary: card.Summary,
-                createdDate: card.CreatedDate,
-                tags: card.Tags.map(
-                    tag => ({id: tag.Id, name: tag.Name})
+                id: card._id,
+                slug: card.slug,
+                title: card.title,
+                summary: card.summary,
+                createdDate: card.createdDate,
+                tags: card.tags.map(
+                    tag => ({id: tag._id, name: tag.name})
                 )
             })
         )
@@ -74,14 +74,14 @@ export const receiveCardDetail = (card) => ({
     type: RECEIVE_CARD_DETAIL,
     receivedAt: Date.now(),
     item: {
-        id: card.Id,
-        slug: card.Slug,
-        title: card.Title,
-        imageUrl: card.ImageUrl,
-        createdDate: card.CreatedDate,
-        content: card.Content,
-        tags: card.Tags.map(
-            tag => ({id: tag.Id, name: tag.Name})
+        id: card._id,
+        slug: card.slug,
+        title: card.title,
+        imageUrl: card.imageUrl,
+        createdDate: card.createdDate,
+        content: card.content,
+        tags: card.tags.map(
+            tag => ({id: tag._id, name: tag.name})
         )
     }
 })
@@ -89,7 +89,7 @@ export const receiveCardDetail = (card) => ({
 export const fetchAllCards = () => {
     return dispatch => {
         dispatch(requestAllCards())
-        return fetch(cardApi)
+        return fetch(`${api_url}/cards`)
             .then(response => response.json())
             .then(cards => dispatch(receiveAllCards(cards)))
     }
@@ -98,7 +98,7 @@ export const fetchAllCards = () => {
 export const fetchCardDetail = (slug) => {
     return dispatch => {
         dispatch(requestCardDetail(slug))
-        return fetch(`${cardApi}/${slug}`)
+        return fetch(`${api_url}/cards/${slug}`)
             .then(response => response.json())
             .then(card => dispatch(receiveCardDetail(card)))
     }
@@ -107,7 +107,7 @@ export const fetchCardDetail = (slug) => {
 export const fetchAllTags = () => {
     return dispatch => {
         dispatch(requestAllTags())
-        return fetch(tagApi)
+        return fetch(`${api_url}/tags`)
             .then(response => response.json())
             .then(tags => dispatch(receiveAllTags(tags)))
     }
