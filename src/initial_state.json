@@ -41,12 +41,10 @@
                 "tags": [
                     {
                         "id": 1,
-                        "slug": "all",
                         "name": "All"
                     },
                     {
                         "id": 2,
-                        "slug": "new",
                         "name": "New"
                     }
                 ]
@@ -60,7 +58,6 @@
                 "tags": [
                     {
                         "id": 1,
-                        "slug": "all",
                         "name": "All"
                     }
                 ]
@@ -74,12 +71,10 @@
         "items": [
             {
                 "id": 1,
-                "slug": "all",
                 "name": "All"
             },
             {
                 "id": 2,
-                "slug": "new",
                 "name": "New"
             }
         ]

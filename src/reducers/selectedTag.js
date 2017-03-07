@@ -9,7 +9,7 @@ import { SELECT_TAG } from '../actions'
 const selectedTag = (state = 0, action) => {
     switch (action.type) {
         case SELECT_TAG:
-            return action.id
+            return action.name
         default:
             return state
     }

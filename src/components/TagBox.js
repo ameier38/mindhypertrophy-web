@@ -10,7 +10,7 @@ const TagBox = ({tags, onTagClick}) => (
                 <Tag 
                     key={tag.id} 
                     name={tag.name} 
-                    onClick={() => onTagClick(tag.id)} /> 
+                    onTagClick={() => onTagClick(tag.name)} /> 
             )}
         </ButtonToolbar>
     </div>

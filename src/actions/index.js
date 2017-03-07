@@ -16,9 +16,9 @@ export const REQUEST_CARD_DETAIL = 'REQUEST_CARD_DETAIL'
 export const RECEIVE_CARD_DETAIL = 'RECEIVE_CARD_DETAIL'
 export const FILTER_CARDS_BY_TAG = 'FILTER_CARDS_BY_TAG'
 
-export const selectTag = (id) => ({
+export const selectTag = (name) => ({
     type: SELECT_TAG, 
-    id
+    name
 })
 
 export const selectCard = (slug) => ({

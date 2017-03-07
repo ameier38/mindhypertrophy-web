@@ -4,18 +4,21 @@ import { selectTag, selectCard } from '../actions'
 import { push } from 'react-router-redux'
 
 const getVisibleCards = (cards, selectedTag) => {
-    if (selectedTag === "All"){
+    if (selectedTag === 'All') {
         return cards
     }
     else {
         return cards.filter(
-            card => {
-                return card.tags.some(
-                    tag => tag.id === selectedTag
-                )
-            }
+            card => card.tags.some(
+                tag => tag.name === selectedTag
+            )
         )
     }
+}
+
+const onTagClick = (dispatch, name) => {
+    console.log(`tag ${name} clicked`)
+    dispatch(selectTag(name))
 }
 
 const onCardClick = (dispatch, slug) => {
@@ -31,7 +34,7 @@ const mapStateToProps = (state) => ({
 }) 
 
 const mapDispatchToProps = (dispatch) => ({
-    onTagClick: slug => dispatch(selectTag(slug)),
+    onTagClick: name => onTagClick(dispatch, name),
     onCardClick: slug => onCardClick(dispatch, slug)
 })
 
