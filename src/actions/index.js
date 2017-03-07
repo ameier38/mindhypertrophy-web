@@ -4,8 +4,7 @@
 import fetch from 'isomorphic-fetch'
 
 const host = process.env.REACT_APP_API_HOST
-const port = process.env.REACT_APP_API_PORT
-const api_url = `http://${host}:${port}/api`
+const api_url = `http://${host}/api`
 
 export const SELECT_TAG = 'SELECT_TAG'
 export const SELECT_CARD = 'SELECT_CARD'
