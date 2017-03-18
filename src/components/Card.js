@@ -1,9 +1,23 @@
 import React, { PropTypes } from 'react';
+import dateFormat from 'dateformat'
 import { Col } from 'react-bootstrap';
 import CardHeader from './CardHeader';
 import CardSummary from './CardSummary';
 import TagBox from './TagBox';
-import '../styles/Card.css';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+const Article = ({ card, onCardClick, onTagClick }) => (
+  <Card>
+    <CardTitle title={card.title} subtitle={dateFormat(card.createdDate)} />
+    <CardText>
+        {card.summary}
+    </CardText>
+    <CardActions>
+      <FlatButton label="Action1" />
+      <FlatButton label="Action2" />
+    </CardActions>
+  </Card>
+)
 
 const Card = ({ card, onCardClick, onTagClick}) => (
     <Col xs={12} sm={6}>

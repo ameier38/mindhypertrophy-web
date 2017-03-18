@@ -1,26 +1,45 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { Navbar, Nav } from 'react-bootstrap'
-import '../styles/Navigation.css'
+import React, { PropTypes } from 'react'
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
+import FindBottomNavigationItem from './FindBottomNavigationItem'
+import Paper from 'material-ui/Paper'
+import IconHome from 'material-ui/svg-icons/action/home'
+import IconRecent from 'material-ui/svg-icons/action/update'
+import IconAbout from 'material-ui/svg-icons/action/info'
+import IconContact from 'material-ui/svg-icons/communication/comment'
 
-const Navigation = () => (
-    <div className="Navigation">
-        <Navbar fixedTop inverse >
-            <Nav pullLeft>
-                <Navbar.Brand>
-                    <Link to="/">Mind Hypertrophy</Link>                      
-                </Navbar.Brand>
-            </Nav>
-            <Nav pullRight>
-                <Navbar.Brand>
-                    <Link to="/about">About</Link>                      
-                </Navbar.Brand>
-                <Navbar.Brand>
-                    <Link to="/contact">Contact</Link>                      
-                </Navbar.Brand>                    
-            </Nav>
-        </Navbar>
-    </div> 
+const navigationStyle = {
+    position: "fixed", 
+    bottom: 0, 
+    width: "100vw"
+}
+
+const Navigation = ({ onTagClick, onCardClick }) => (
+    <Paper style={navigationStyle} zDepth={1}>
+        <BottomNavigation>
+            <BottomNavigationItem 
+                label="Home" 
+                icon={<IconHome />} 
+                onTouchTap={() => onTagClick('All')}/>
+            <BottomNavigationItem 
+                label="Recent" 
+                icon={<IconRecent />} 
+                onTouchTap={() => onTagClick('New')}/>
+            <FindBottomNavigationItem />
+            <BottomNavigationItem
+                label="About"
+                icon={<IconAbout />}
+                onTouchTap={() => onCardClick('about')}/>
+            <BottomNavigationItem
+                label="Contact"
+                icon={<IconContact />}
+                onTouchTap={() => onCardClick('contact')}/>
+        </BottomNavigation>
+    </Paper>
 )
+
+Navigation.propTypes = {
+    onTagClick: PropTypes.func.isRequired,
+    onCardClick: PropTypes.func.isRequired
+}
 
 export default Navigation

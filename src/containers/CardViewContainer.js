@@ -3,6 +3,8 @@ import CardView from '../components/CardView'
 import { selectTag, selectCard } from '../actions'
 import { push } from 'react-router-redux'
 
+const debug = require('debug')('web:containers:CardViewContainer')
+
 const getVisibleCards = (cards, selectedTag) => {
     if (selectedTag === 'All') {
         return cards
@@ -17,13 +19,14 @@ const getVisibleCards = (cards, selectedTag) => {
 }
 
 const onTagClick = (dispatch, name) => {
-    console.log(`tag ${name} clicked`)
+    debug(`tag ${name} clicked`)
     dispatch(selectTag(name))
 }
 
 const onCardClick = (dispatch, slug) => {
+    debug(`card ${slug} clicked`)
     dispatch(selectCard(slug))
-    console.log(`pushing url: /articles/${slug}`)
+    debug(`pushing url: /articles/${slug}`)
     dispatch(push(`/articles/${slug}`))
 }
 

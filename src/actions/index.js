@@ -3,8 +3,9 @@
  */
 import fetch from 'isomorphic-fetch'
 
-const host = process.env.REACT_APP_API_HOST
-const api_url = `http://${host}/api`
+const host = process.env.REACT_APP_API_HOST || "localhost"
+const port = process.env.REACT_APP_API_PORT || 5000
+const api_url = `http://${host}:${port}/api`
 
 export const SELECT_TAG = 'SELECT_TAG'
 export const SELECT_CARD = 'SELECT_CARD'
@@ -97,7 +98,7 @@ export const fetchAllCards = () => {
 export const fetchCardDetail = (slug) => {
     return dispatch => {
         dispatch(requestCardDetail(slug))
-        return fetch(`${api_url}/cards/${slug}`)
+        return fetch(`${api_url}/cards/slug/${slug}`)
             .then(response => response.json())
             .then(card => dispatch(receiveCardDetail(card)))
     }
