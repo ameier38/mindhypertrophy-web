@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import selectedTag from './selectedTag'
-import selectedCard from './selectedCard'
-import cards from './cards'
+import selectedTags from './selectedTags'
+import selectedArticle from './selectedArticle'
+import articles from './articles'
 import tags from './tags'
-import cardDetail from './cardDetail'
 
 
 /**
@@ -14,11 +13,10 @@ import cardDetail from './cardDetail'
  * name of the reducer.
  */
 const rootReducer = combineReducers({
-    selectedTag,
-    selectedCard,
-    cards,
     tags,
-    cardDetail,
+    selectedTags,
+    articles,
+    selectedArticle,
     routing: routerReducer
 })
 

@@ -1,0 +1,60 @@
+{
+    "selectedTags": ["Cool", "New"],
+    "selectedArticle": {
+        "id": 1,
+        "slug": "about",
+        "createdDate": "2016-02-26",
+        "imageUrl": "s3://blah_blah",
+        "title": "About",
+        "summary": "Blog about stuff",
+        "content": {
+            "isFetching": false,
+            "requestedAt": 1488195236191,
+            "receivedAt": 1488195241578,
+            "markdown": "### About \nAbout this blog"
+        },
+        "tags": [
+            {"id": 1, "name": "All"},
+            {"id": 2, "name": "New"}
+        ]
+    },
+    "articles": {
+        "isFetching": false,
+        "requestedAt": 1488195236191,
+        "receivedAt": 1488195241578,
+        "articles": [
+            {
+                "id": 1,
+                "slug": "about",
+                "createdDate": "2016-02-26",
+                "imageUrl": "s3://blah_blah",
+                "title": "About",
+                "summary": "Blog about stuff",
+                "tags": [
+                    {"id": 1, "name": "Cool"},
+                    {"id": 2, "name": "New"}
+                ]
+            },
+            {
+                "id": 2,
+                "slug": "contact",
+                "createdDate": "2016-02-26",
+                "imageUrl": "s3://blah_blah",
+                "title": "Contact",
+                "summary": "Contact Us!",
+                "tags": [
+                    {"id": 1, "name": "Cool"}
+                ]
+            }
+        ]
+    },
+    "tags": {
+        "isFetching": false,
+        "requestedAt": 1488195236191,
+        "receivedAt": 1488195241578,
+        "tags": [
+            {"id": 1, "name": "Cool"},
+            {"id": 2, "name": "New"}
+        ]
+    }
+}

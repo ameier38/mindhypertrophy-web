@@ -1,29 +1,30 @@
-import { REQUEST_ALL_CARDS, RECEIVE_ALL_CARDS } from '../actions'
+import { REQUEST_ALL_ARTICLES, RECEIVE_ALL_ARTICLES } from '../actions'
 
 const default_state = {
     isFetching: false,
     requestedAt: null,
     receivedAt: null,
-    items: []
+    articles: []
 }
-const cards = (state = default_state, action) => {
+
+const articles = (state = default_state, action) => {
     switch (action.type) {
-        case REQUEST_ALL_CARDS:
+        case REQUEST_ALL_ARTICLES:
             return {
                 ...state, 
                 isFetching: true,
                 requestedAt: action.requestedAt
             }
-        case RECEIVE_ALL_CARDS:
+        case RECEIVE_ALL_ARTICLES:
             return {
                 ...state, 
                 isFetching: false, 
                 receivedAt: action.receivedAt,
-                items: action.items
+                articles: action.articles
             }
         default:
             return state
     }
 }
 
-export default cards
+export default articles

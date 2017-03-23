@@ -1,10 +1,3 @@
-import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap'
-import CommentsCard from './CommentsCard'
-import Banner from './Banner'
-import '../styles/CardView.css'
-import '../styles/CardContent.css'
-
 const content = (
     <div className="CardContent">
         <blockquote>
@@ -41,24 +34,3 @@ const content = (
         </ul>         
     </div>
 )
-
-const AboutView = () => (
-    <div className="CardView">
-        <Banner 
-            includeLogo={true}
-            title={"About"}
-            description={"A blog to help us learn."} />
-        <Grid>
-            <Row>
-                <Col xs={12}>
-                    <div className="Card">
-                        {content}
-                    </div>
-                </Col>
-                <CommentsCard identifier={"about"} title={"About"} />
-            </Row>
-        </Grid>
-    </div>
-)
-
-export default AboutView

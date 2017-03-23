@@ -1,12 +1,18 @@
 import React, { PropTypes } from 'react'
-import { Button } from 'react-bootstrap'
+import { grey500 } from 'material-ui/styles/colors'
+import Chip from 'material-ui/Chip';
 
-const Tag = ({name, onTagClick}) => {
-    const style = (name === "All") ? "primary" : "default"
-    return (
-        <Button bsSize="xsmall" bsStyle={style} onClick={onTagClick}>{name}</Button>
-    )
+const tagStyle = {
+    margin: 4,
+    backgroundColor: grey500
 }
+
+const Tag = ({name, onTagClick}) => (
+    <Chip style={tagStyle} onTouchTap={onTagClick} >
+        {name}
+    </Chip>
+)
+
 Tag.PropTypes = {
     name: PropTypes.string.isRequired,
     onTagClick: PropTypes.func.isRequired

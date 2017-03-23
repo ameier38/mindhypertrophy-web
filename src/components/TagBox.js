@@ -1,18 +1,19 @@
 import React, { PropTypes } from 'react'
-import { ButtonToolbar } from 'react-bootstrap'
 import Tag from './Tag'
-import '../styles/TagBox.css'
+
+const tagBoxStyle = {
+    display: 'flex',
+    flexWrap: 'wrap'
+}
 
 const TagBox = ({tags, onTagClick}) => (
-    <div className="TagBox">
-        <ButtonToolbar>
-            { tags.map(tag =>
-                <Tag 
-                    key={tag.id} 
-                    name={tag.name} 
-                    onTagClick={() => onTagClick(tag.name)} /> 
-            )}
-        </ButtonToolbar>
+    <div style={tagBoxStyle}>
+        { tags.map(tag =>
+            <Tag 
+                key={tag.id} 
+                name={tag.name} 
+                onTagClick={() => onTagClick(tag.name)} /> 
+        )}
     </div>
 
 )

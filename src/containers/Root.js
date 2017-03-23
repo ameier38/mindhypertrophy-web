@@ -3,29 +3,25 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from '../configureStore'
-import initial_state from '../initial_state.json'
+import initialState from '../initialState.json'
 import App from '../components/App'
-import CardViewContainer from '../containers/CardViewContainer'
-import AboutView from '../components/AboutView'
-import ContactView from '../components/ContactView'
-import DetailViewContainer from '../containers/DetailViewContainer'
+import ArticleCardViewContainer from '../containers/ArticleCardViewContainer'
+import ArticleViewContainer from '../containers/ArticleViewContainer'
 import NotFound from '../components/NotFound'
-import { fetchAllCards, fetchAllTags } from '../actions'
+import { fetchAllArticles, fetchAllTags } from '../actions'
 
-const store = configureStore(initial_state)
+const store = configureStore(initialState)
 const history = syncHistoryWithStore(browserHistory, store)
 
-store.dispatch(fetchAllCards())
+store.dispatch(fetchAllArticles())
 store.dispatch(fetchAllTags())
 
 const Root = () => (
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
-                <IndexRoute component={CardViewContainer} />
-                <Route path="about" component={AboutView} />
-                <Route path="contact" component={ContactView} />
-                <Route path="articles/:slug" component={DetailViewContainer} />
+            <Route exact path="/" component={App}>
+                <IndexRoute component={ArticleCardViewContainer} />
+                <Route path=":slug" component={ArticleViewContainer} />
                 <Route path="*" component={NotFound} />
             </Route>
         </Router>

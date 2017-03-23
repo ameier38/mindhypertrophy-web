@@ -2,30 +2,65 @@
  * All available actions.
  */
 import fetch from 'isomorphic-fetch'
+import { push } from 'react-router-redux'
 
 const host = process.env.REACT_APP_API_HOST || "localhost"
 const port = process.env.REACT_APP_API_PORT || 5000
 const api_url = `http://${host}:${port}/api`
 
-export const SELECT_TAG = 'SELECT_TAG'
-export const SELECT_CARD = 'SELECT_CARD'
+export const TOGGLE_TAG = 'TOGGLE_TAG'
+export const SELECT_ARTICLE = 'SELECT_ARTICLE'
 export const REQUEST_ALL_TAGS = 'REQUEST_ALL_TAGS'
 export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS'
-export const REQUEST_ALL_CARDS = 'REQUEST_ALL_CARDS'
-export const RECEIVE_ALL_CARDS = 'RECEIVE_ALL_CARDS'
-export const REQUEST_CARD_DETAIL = 'REQUEST_CARD_DETAIL'
-export const RECEIVE_CARD_DETAIL = 'RECEIVE_CARD_DETAIL'
-export const FILTER_CARDS_BY_TAG = 'FILTER_CARDS_BY_TAG'
+export const REQUEST_ALL_ARTICLES = 'REQUEST_ALL_ARTICLES'
+export const RECEIVE_ALL_ARTICLES = 'RECEIVE_ALL_ARTICLES'
+export const REQUEST_ARTICLE_CONTENT = 'REQUEST_ARTICLE_CONTENT'
+export const RECEIVE_ARTICLE_CONTENT = 'RECEIVE_ARTICLE_CONTENT'
 
-export const selectTag = (name) => ({
-    type: SELECT_TAG, 
-    name
+/**
+ * Private. Indicates tag to add or 
+ * remove from the selectedTags array
+ * @param {string} tagName - name of tag
+ */
+const _toggleTag = (tagName) => ({
+    type: TOGGLE_TAG, 
+    tagName
 })
 
-export const selectCard = (slug) => ({
-    type: SELECT_CARD,
-    slug
+/**
+ * Dispatches _toggleTag action then dispatches
+ * push action to redirect to home route
+ * @param {string} tagName 
+ * @return {thunk}
+ */
+export const toggleTag = (tagName) => {
+    return dispatch => {
+        dispatch(_toggleTag(tagName))
+        dispatch(push('/'))
+    }
+}
+
+/**
+ * Private. Indicates the article for which
+ * to set selectedArticle state
+ * @param {object} article 
+ */
+const _selectArticle = (article) => ({
+    type: SELECT_ARTICLE,
+    article
 })
+
+/**
+ * Dispatches _selectArticle then dispatches
+ * push action to redirect to article route
+ * @param {string} article 
+ */
+export const selectArticle = (article) => {
+    return dispatch => {
+        dispatch(_selectArticle(article))
+        dispatch(push(`/${article.slug}`))
+    }
+}
 
 export const requestAllTags = () => ({
     type: REQUEST_ALL_TAGS,
@@ -40,67 +75,58 @@ export const receiveAllTags = (tags) => ({
     )
 })
 
-export const requestAllCards = () => ({
-    type: REQUEST_ALL_CARDS,
+export const requestAllArticles = () => ({
+    type: REQUEST_ALL_ARTICLES,
     requestedAt: Date.now()
 })
 
-export const receiveAllCards = (cards) => {
+export const receiveAllArticles = (articles) => {
     return({
-        type: RECEIVE_ALL_CARDS,
+        type: RECEIVE_ALL_ARTICLES,
         receivedAt: Date.now(),
-        items: cards.map(
-            card => ({
-                id: card._id,
-                slug: card.slug,
-                title: card.title,
-                summary: card.summary,
-                createdDate: card.createdDate,
-                tags: card.tags.map(
-                    tag => ({id: tag._id, name: tag.name})
+        articles: articles.map(
+            article => ({
+                id: article.id,
+                slug: article.slug,
+                title: article.title,
+                imageUrl: article.imageUrl,
+                summary: article.summary,
+                createdDate: article.createdDate,
+                tags: article.tags.map(
+                    tag => ({id: tag.id, name: tag.name})
                 )
             })
         )
     })
 }
 
-export const requestCardDetail = (slug) => ({
-    type: REQUEST_CARD_DETAIL,
+export const requestArticleContent = (slug) => ({
+    type: REQUEST_ARTICLE_CONTENT,
     slug,
     requestedAt: Date.now()
 })
 
-export const receiveCardDetail = (card) => ({
-    type: RECEIVE_CARD_DETAIL,
+export const receiveArticleContent = (article) => ({
+    type: RECEIVE_ARTICLE_CONTENT,
     receivedAt: Date.now(),
-    item: {
-        id: card._id,
-        slug: card.slug,
-        title: card.title,
-        imageUrl: card.imageUrl,
-        createdDate: card.createdDate,
-        content: card.content,
-        tags: card.tags.map(
-            tag => ({id: tag._id, name: tag.name})
-        )
-    }
+    markdown: article.markdown
 })
 
-export const fetchAllCards = () => {
+export const fetchAllArticles = () => {
     return dispatch => {
-        dispatch(requestAllCards())
-        return fetch(`${api_url}/cards`)
+        dispatch(requestAllArticles())
+        return fetch(`${api_url}/articles`)
             .then(response => response.json())
-            .then(cards => dispatch(receiveAllCards(cards)))
+            .then(articles => dispatch(receiveAllArticles(articles)))
     }
 }
 
-export const fetchCardDetail = (slug) => {
+export const fetchArticleContent = (slug) => {
     return dispatch => {
-        dispatch(requestCardDetail(slug))
-        return fetch(`${api_url}/cards/slug/${slug}`)
+        dispatch(requestArticleContent(slug))
+        return fetch(`${api_url}/articles/slug/${slug}`)
             .then(response => response.json())
-            .then(card => dispatch(receiveCardDetail(card)))
+            .then(article => dispatch(receiveArticleContent(article)))
     }
 }
 
