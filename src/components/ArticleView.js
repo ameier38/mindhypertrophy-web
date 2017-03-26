@@ -8,11 +8,12 @@ const ArticleView = ({ article, onTagClick }) => (
     <div className="ArticleView">
         <Banner 
             imageUrl={article.imageUrl}
-            includeLogo={false}
             title={article.title}
             description={dateFormat(article.createdDate, 'fullDate')} />
-        <Article isFetching={article.content.isFetching} markdown={article.content.markdown} /> 
-        <Comments identifier={article.slug} title={article.title} />
+        <div className="container">
+            <Article isFetching={article.content.isFetching} markdown={article.content.markdown} /> 
+            <Comments identifier={article.slug} title={article.title} />
+        </div>
     </div>
 )
 

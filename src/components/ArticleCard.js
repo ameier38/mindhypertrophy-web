@@ -1,18 +1,21 @@
 import React, { PropTypes } from 'react';
 import dateFormat from 'dateformat'
 import TagBox from './TagBox';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import Divider from 'material-ui/Divider'
+import '../styles/ArticleCard.css'
 
 const ArticleCard = ({ article, onArticleClick, onTagClick }) => (
-    <Card>
-        <CardTitle title={article.title} subtitle={dateFormat(article.createdDate, 'fullDate')} />
-        <CardText>
-            {article.summary}
-        </CardText>
-        <Divider />
-        <TagBox tags={article.tags} onTagClick={onTagClick} />
-    </Card>
+    <div className="ArticleCard col s12 m6" onClick={onArticleClick}>
+        <div className="card">
+            <div className="card-content">
+                <span className="card-title">{article.title}</span>
+                <span className="card-subtitle">{dateFormat(article.createdDate, 'fullDate')}</span>
+                <p>{article.summary}</p>
+            </div>
+            <div className="card-action">
+                <TagBox tags={article.tags} onTagClick={onTagClick} />
+            </div>
+        </div>
+    </div>
 )
 
 ArticleCard.propTypes = {

@@ -1,27 +1,20 @@
 import React, { PropTypes } from 'react'
-import Paper from 'material-ui/Paper'
-import logoImage from '../images/mindhypertrophy.png'
+import '../styles/Banner.css'
 
-const bannerStyle = {
-    height: "20vh",
-    width: "100vh"
-}
-
-const Banner = ({ imageUrl, includeLogo, title, description }) => {
+const Banner = ({ imageUrl, title, description }) => {
     const backgroundStyle = {backgroundImage: `url(${imageUrl})`}
-    const logo = includeLogo ? (<img src={logoImage} role="presentation" />) : null
     return (
-        <Paper style={{...bannerStyle, ...backgroundStyle}}>
-            {logo}
-            <h1>{title}</h1>
-            <p>{description}</p>
-        </Paper>
+        <div className="Banner z-depth-1 valign-wrapper" style={backgroundStyle}>
+            <div className="container valign">
+                <h2>{title}</h2>
+                <h4>{description}</h4>
+            </div>
+        </div>
     )
 }
 
 Banner.propTypes = {
     imageUrl: PropTypes.string,
-    includeLogo: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
 }

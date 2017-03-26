@@ -22,8 +22,8 @@ const Root = () => (
             <Route exact path="/" component={App}>
                 <IndexRoute component={ArticleCardViewContainer} />
                 <Route path=":slug" component={ArticleViewContainer} />
-                <Route path="*" component={NotFound} />
             </Route>
+            <Route path="*" component={NotFound} />
         </Router>
     </Provider>
 )

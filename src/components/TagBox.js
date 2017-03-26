@@ -1,13 +1,8 @@
 import React, { PropTypes } from 'react'
 import Tag from './Tag'
 
-const tagBoxStyle = {
-    display: 'flex',
-    flexWrap: 'wrap'
-}
-
 const TagBox = ({tags, onTagClick}) => (
-    <div style={tagBoxStyle}>
+    <div className="TagBox">
         { tags.map(tag =>
             <Tag 
                 key={tag.id} 
@@ -17,6 +12,7 @@ const TagBox = ({tags, onTagClick}) => (
     </div>
 
 )
+
 TagBox.propTypes = {
     tags: PropTypes.array.isRequired,
     onTagClick: PropTypes.func.isRequired

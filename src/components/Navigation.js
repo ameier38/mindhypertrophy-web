@@ -1,45 +1,62 @@
-import React, { PropTypes } from 'react'
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
-import FindBottomNavigationItem from './FindBottomNavigationItem'
-import Paper from 'material-ui/Paper'
-import IconHome from 'material-ui/svg-icons/action/home'
-import IconRecent from 'material-ui/svg-icons/action/update'
-import IconAbout from 'material-ui/svg-icons/action/info'
-import IconContact from 'material-ui/svg-icons/communication/comment'
+import React, { Component, PropTypes } from 'react'
+import SideNavigation from './SideNavigation'
+import BottomNavigation from './BottomNavigation'
+import SearchModal from './SearchModal'
 
-const navigationStyle = {
-    position: "fixed", 
-    bottom: 0, 
-    width: "100vw"
+const $ = window.$;
+const modalTarget = 'searchModal'
+
+class Navigation extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            modalOpen: false
+        }
+        this.handleFindClick = this.handleFindClick.bind(this)
+    }
+    componentDidMount() {
+        $('.modal').modal({
+            ready: () => this.setState({modalOpen: true}),
+            complete: () => this.setState({modalOpen: false})
+        })
+    }
+    handleFindClick() {
+        if (this.state.modalOpen) {
+            $(`#${modalTarget}`).modal('close')
+            this.setState({modalOpen: false})
+        }
+        else {
+            $(`#${modalTarget}`).modal('open')
+            this.setState({modalOpen: true})
+        }
+    }
+    render() {
+        const { onTagClick, onArticleClick, tags, selectedTags } = this.props
+        return (
+            <div className="Navigation">
+                <SideNavigation 
+                    onFindClick={this.handleFindClick}
+                    onArticleClick={onArticleClick} 
+                    onTagClick={onTagClick} />
+                <BottomNavigation 
+                    onFindClick={this.handleFindClick}
+                    onArticleClick={onArticleClick} 
+                    onTagClick={onTagClick} />
+                <SearchModal 
+                    target={modalTarget} 
+                    onTagClick={onTagClick} 
+                    tags={tags} 
+                    selectedTags={selectedTags} />
+            </div>
+        )
+    }
 }
 
-const Navigation = ({ onTagClick, onCardClick }) => (
-    <Paper style={navigationStyle} zDepth={1}>
-        <BottomNavigation>
-            <BottomNavigationItem 
-                label="Home" 
-                icon={<IconHome />} 
-                onTouchTap={() => onTagClick('All')}/>
-            <BottomNavigationItem 
-                label="Recent" 
-                icon={<IconRecent />} 
-                onTouchTap={() => onTagClick('New')}/>
-            <FindBottomNavigationItem />
-            <BottomNavigationItem
-                label="About"
-                icon={<IconAbout />}
-                onTouchTap={() => onCardClick('about')}/>
-            <BottomNavigationItem
-                label="Contact"
-                icon={<IconContact />}
-                onTouchTap={() => onCardClick('contact')}/>
-        </BottomNavigation>
-    </Paper>
-)
-
 Navigation.propTypes = {
+    onArticleClick: PropTypes.func.isRequired,
     onTagClick: PropTypes.func.isRequired,
-    onCardClick: PropTypes.func.isRequired
+    tags: PropTypes.array.isRequired,
+    selectedTags: PropTypes.array.isRequired
 }
 
 export default Navigation

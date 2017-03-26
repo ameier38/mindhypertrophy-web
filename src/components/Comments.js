@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
-import Paper from 'material-ui/Paper'
-import DisqusThread from 'react-disqus-thread'
+import Paper from './Paper'
+import DisqusComments from 'react-disqus-comments'
 
 const Comments = ({ identifier, title }) => (
     <Paper>
-        <DisqusThread
+        <DisqusComments
             shortname="mindhypertrophy"
             identifier={identifier}
             title={title}

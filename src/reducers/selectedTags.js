@@ -14,7 +14,7 @@ const selectedTags = (state = [], action) => {
                 return state.filter(name => name !== tagName)
             }
             else{
-                return {...state, tagName}
+                return [...state, tagName]
             }
         default:
             return state

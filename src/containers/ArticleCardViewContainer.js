@@ -5,13 +5,20 @@ import { toggleTag, selectArticle } from '../actions'
 const debug = require('debug')('web:containers:ArticleCardViewContainer')
 
 const getVisibleArticles = (articles, selectedTags) => {
-    return articles.filter(
-        article => article.tags.some(
-            articleTag => selectedTags.some(
-                selectedTag => selectedTag === articleTag
+    if (selectedTags.length === 0) {
+        return articles
+    }
+    else {
+        console.log(`articles: ${articles.length}`)
+        console.log(`selectedTags: ${selectedTags}`)
+        return articles.filter(
+            article => article.tags.some(
+                articleTag => selectedTags.some(
+                    selectedTag => selectedTag === articleTag
+                )
             )
         )
-    )
+    }
 }
 
 const onTagClick = (dispatch, tagName) => {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import Paper from 'material-ui/Paper'
 import { ThreeBounce } from 'better-react-spinkit'
+import Paper from './Paper'
 import Markdown from './Markdown'
 
 const Article = ({ isFetching, markdown }) => (
