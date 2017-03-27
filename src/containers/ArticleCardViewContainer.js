@@ -1,44 +1,45 @@
 import { connect } from 'react-redux'
 import ArticleCardView from '../components/ArticleCardView'
-import { toggleTag, selectArticle } from '../actions'
-
-const debug = require('debug')('web:containers:ArticleCardViewContainer')
+import { selectArticle } from '../actions'
 
 const getVisibleArticles = (articles, selectedTags) => {
     if (selectedTags.length === 0) {
-        return articles
+        return articles.map(article => ({
+            ...article,
+            tags: article.tags.map(tag => ({
+                ...tag,
+                selected: false
+            }))
+        }))
     }
     else {
-        console.log(`articles: ${articles.length}`)
-        console.log(`selectedTags: ${selectedTags}`)
-        return articles.filter(
-            article => article.tags.some(
-                articleTag => selectedTags.some(
-                    selectedTag => selectedTag === articleTag
+        const updatedArticles = articles.map(article => ({
+            ...article,
+            tags: article.tags.map(tag => ({
+                ...tag,
+                selected: selectedTags.some(
+                    selectedTag => selectedTag.name === tag.name
                 )
+            }))
+        }))
+        return updatedArticles.filter(
+            article => article.tags.some(
+                articleTag => articleTag.selected
             )
         )
     }
 }
 
-const onTagClick = (dispatch, tagName) => {
-    debug(`tag ${tagName} clicked`)
-    dispatch(toggleTag(tagName))
+const mapStateToProps = (state) => {
+    const selectedTags = state.tags.tags.filter(tag => tag.selected)
+    return ({
+        isFetching: state.articles.isFetching,
+        articles: getVisibleArticles(state.articles.articles, selectedTags),
+    })
 }
-
-const onArticleClick = (dispatch, article) => {
-    debug(`article ${article.slug} clicked`)
-    dispatch(selectArticle(article))
-}
-
-const mapStateToProps = (state) => ({
-    isFetching: state.articles.isFetching,
-    articles: getVisibleArticles(state.articles.articles, state.selectedTags)
-}) 
 
 const mapDispatchToProps = (dispatch) => ({
-    onTagClick: tagName => onTagClick(dispatch, tagName),
-    onArticleClick: slug => onArticleClick(dispatch, slug)
+    selectArticle: selectedArticle => dispatch(selectArticle(selectedArticle))
 })
 
 const ArticleCardViewContainer = connect(

@@ -3,24 +3,25 @@ import ArticleCard from './ArticleCard'
 import Banner from './Banner'
 import LoadingArticleCard from './LoadingArticleCard'
 import background from '../images/neurons.jpg'
+import logo from '../images/mindhypertrophy.png'
 
-const ArticleCardView = ({ isFetching, articles, onArticleClick, onTagClick }) => (
+const ArticleCardView = ({ isFetching, articles, selectArticle }) => (
     <div className="ArticleCardView">
         <Banner 
             imageUrl={background}
+            logo={logo}
             title="Mind Hypertrophy"
             description="Train your brain!" />
         <div className="container">
             <div className="row">
-                { isFetching && [1,2].map( id =>
+                { isFetching && ['1','2'].map( id =>
                     <LoadingArticleCard key={id} />
                 )}
                 { !isFetching && articles.length > 0 && articles.map(article => 
                     <ArticleCard 
                         key={article.id}
                         article={article} 
-                        onArticleClick={() => onArticleClick(article)} 
-                        onTagClick={onTagClick} />
+                        selectArticle={() => selectArticle(article)} />
                 )}
             </div>
         </div>
@@ -29,8 +30,7 @@ const ArticleCardView = ({ isFetching, articles, onArticleClick, onTagClick }) =
 ArticleCardView.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     articles: PropTypes.array.isRequired,
-    onArticleClick: PropTypes.func.isRequired,
-    onTagClick: PropTypes.func.isRequired
+    selectArticle: PropTypes.func.isRequired,
 }
 
 export default ArticleCardView

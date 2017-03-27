@@ -31,32 +31,37 @@ class Navigation extends Component {
         }
     }
     render() {
-        const { onTagClick, onArticleClick, tags, selectedTags } = this.props
+        const { 
+            toggleTag, clearTags, 
+            tags, pushArticle 
+        } = this.props
         return (
             <div className="Navigation">
                 <SideNavigation 
                     onFindClick={this.handleFindClick}
-                    onArticleClick={onArticleClick} 
-                    onTagClick={onTagClick} />
+                    pushArticle={pushArticle} 
+                    toggleTag={toggleTag}
+                    clearTags={clearTags} />
                 <BottomNavigation 
                     onFindClick={this.handleFindClick}
-                    onArticleClick={onArticleClick} 
-                    onTagClick={onTagClick} />
+                    pushArticle={pushArticle} 
+                    toggleTag={toggleTag}
+                    clearTags={clearTags} />
                 <SearchModal 
                     target={modalTarget} 
-                    onTagClick={onTagClick} 
-                    tags={tags} 
-                    selectedTags={selectedTags} />
+                    toggleTag={toggleTag} 
+                    clearTags={clearTags}
+                    tags={tags} />
             </div>
         )
     }
 }
 
 Navigation.propTypes = {
-    onArticleClick: PropTypes.func.isRequired,
-    onTagClick: PropTypes.func.isRequired,
-    tags: PropTypes.array.isRequired,
-    selectedTags: PropTypes.array.isRequired
+    pushArticle: PropTypes.func.isRequired,
+    toggleTag: PropTypes.func.isRequired,
+    clearTags: PropTypes.func.isRequired,
+    tags: PropTypes.array.isRequired
 }
 
 export default Navigation

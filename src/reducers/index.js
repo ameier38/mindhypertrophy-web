@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import selectedTags from './selectedTags'
-import selectedArticle from './selectedArticle'
 import articles from './articles'
+import selectedArticle from './selectedArticle'
 import tags from './tags'
 
 
@@ -14,7 +13,6 @@ import tags from './tags'
  */
 const rootReducer = combineReducers({
     tags,
-    selectedTags,
     articles,
     selectedArticle,
     routing: routerReducer

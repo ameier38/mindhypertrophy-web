@@ -1,13 +1,13 @@
 import { REQUEST_ALL_ARTICLES, RECEIVE_ALL_ARTICLES } from '../actions'
 
-const default_state = {
-    isFetching: false,
+const defaultArticles = {
+    isFetching: true,
     requestedAt: null,
     receivedAt: null,
     articles: []
 }
 
-const articles = (state = default_state, action) => {
+const articles = (state = defaultArticles, action) => {
     switch (action.type) {
         case REQUEST_ALL_ARTICLES:
             return {

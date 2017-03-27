@@ -9,28 +9,33 @@ const port = process.env.REACT_APP_API_PORT || 5000
 const api_url = `http://${host}:${port}/api`
 
 export const TOGGLE_TAG = 'TOGGLE_TAG'
+export const CLEAR_TAGS = 'CLEAR_TAGS'
 export const SELECT_ARTICLE = 'SELECT_ARTICLE'
 export const REQUEST_ALL_TAGS = 'REQUEST_ALL_TAGS'
 export const RECEIVE_ALL_TAGS = 'RECEIVE_ALL_TAGS'
 export const REQUEST_ALL_ARTICLES = 'REQUEST_ALL_ARTICLES'
 export const RECEIVE_ALL_ARTICLES = 'RECEIVE_ALL_ARTICLES'
-export const REQUEST_ARTICLE_CONTENT = 'REQUEST_ARTICLE_CONTENT'
-export const RECEIVE_ARTICLE_CONTENT = 'RECEIVE_ARTICLE_CONTENT'
+export const REQUEST_ARTICLE = 'REQUEST_ARTICLE'
+export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
 
 /**
- * Private. Indicates tag to add or 
- * remove from the selectedTags array
- * @param {string} tagName - name of tag
+ * Private. Tag to add or remove 
+ * from the selectedTags array
+ * @param {string} tagName - tag name
  */
 const _toggleTag = (tagName) => ({
     type: TOGGLE_TAG, 
     tagName
 })
 
+const _clearTags = () => ({
+    type: CLEAR_TAGS
+})
+
 /**
  * Dispatches _toggleTag action then dispatches
  * push action to redirect to home route
- * @param {string} tagName 
+ * @param {string} tagName
  * @return {thunk}
  */
 export const toggleTag = (tagName) => {
@@ -40,25 +45,32 @@ export const toggleTag = (tagName) => {
     }
 }
 
+export const clearTags = () => {
+    return dispatch => {
+        dispatch(_clearTags())
+        dispatch(push('/'))
+    }
+}
+
 /**
- * Private. Indicates the article for which
+ * Private. Article for which
  * to set selectedArticle state
- * @param {object} article 
+ * @param {object} selectedArticle 
  */
-const _selectArticle = (article) => ({
+const _selectArticle = (selectedArticle) => ({
     type: SELECT_ARTICLE,
-    article
+    selectedArticle
 })
 
 /**
  * Dispatches _selectArticle then dispatches
  * push action to redirect to article route
- * @param {string} article 
+ * @param {object} selectedArticle 
  */
-export const selectArticle = (article) => {
+export const selectArticle = (selectedArticle) => {
     return dispatch => {
-        dispatch(_selectArticle(article))
-        dispatch(push(`/${article.slug}`))
+        dispatch(_selectArticle(selectedArticle))
+        dispatch(push(`/${selectedArticle.slug}`))
     }
 }
 
@@ -70,9 +82,9 @@ export const requestAllTags = () => ({
 export const receiveAllTags = (tags) => ({
     type: RECEIVE_ALL_TAGS,
     receivedAt: Date.now(),
-    items: tags.map(
-        tag => ({id: tag._id, name: tag.name})
-    )
+    tags: tags.map(tag => ({
+        name: tag.name
+    }))
 })
 
 export const requestAllArticles = () => ({
@@ -92,24 +104,24 @@ export const receiveAllArticles = (articles) => {
                 imageUrl: article.imageUrl,
                 summary: article.summary,
                 createdDate: article.createdDate,
-                tags: article.tags.map(
-                    tag => ({id: tag.id, name: tag.name})
-                )
+                tags: article.tags.map(tag => ({
+                    name: tag.name
+                }))
             })
         )
     })
 }
 
-export const requestArticleContent = (slug) => ({
-    type: REQUEST_ARTICLE_CONTENT,
+export const requestArticle = (slug) => ({
+    type: REQUEST_ARTICLE,
     slug,
     requestedAt: Date.now()
 })
 
-export const receiveArticleContent = (article) => ({
-    type: RECEIVE_ARTICLE_CONTENT,
+export const receiveArticle = (selectedArticle) => ({
+    type: RECEIVE_ARTICLE,
     receivedAt: Date.now(),
-    markdown: article.markdown
+    selectedArticle
 })
 
 export const fetchAllArticles = () => {
@@ -118,15 +130,17 @@ export const fetchAllArticles = () => {
         return fetch(`${api_url}/articles`)
             .then(response => response.json())
             .then(articles => dispatch(receiveAllArticles(articles)))
+            .catch(e => console.log(e))
     }
 }
 
-export const fetchArticleContent = (slug) => {
+export const fetchArticle = (slug) => {
     return dispatch => {
-        dispatch(requestArticleContent(slug))
+        dispatch(requestArticle(slug))
         return fetch(`${api_url}/articles/slug/${slug}`)
             .then(response => response.json())
-            .then(article => dispatch(receiveArticleContent(article)))
+            .then(selectedArticle => dispatch(receiveArticle(selectedArticle)))
+            .catch(e => console.log(e))
     }
 }
 
@@ -136,5 +150,6 @@ export const fetchAllTags = () => {
         return fetch(`${api_url}/tags`)
             .then(response => response.json())
             .then(tags => dispatch(receiveAllTags(tags)))
+            .catch(e => console.log(e))
     }
 }

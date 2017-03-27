@@ -1,21 +1,33 @@
 import React, { PropTypes } from 'react'
 import Tag from './Tag'
 
-const TagBox = ({tags, onTagClick}) => (
+const TagBox = ({ clickable, tags, toggleTag}) => (
     <div className="TagBox">
-        { tags.map(tag =>
+        { clickable && tags.map((tag, idx) =>
             <Tag 
-                key={tag.id} 
-                name={tag.name} 
-                onTagClick={() => onTagClick(tag.name)} /> 
+                key={idx} 
+                name={tag.name}
+                selected={tag.selected}
+                clickable={clickable}
+                toggleTag={() => toggleTag(tag.name)} /> 
+        )}
+        { !clickable && tags.map((tag, idx) =>
+            <Tag 
+                key={idx} 
+                name={tag.name}
+                selected={tag.selected}
+                clickable={clickable} /> 
         )}
     </div>
-
 )
 
 TagBox.propTypes = {
-    tags: PropTypes.array.isRequired,
-    onTagClick: PropTypes.func.isRequired
+    tags: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        selected: PropTypes.bool
+    })),
+    clickable: PropTypes.bool.isRequired,
+    toggleTag: PropTypes.func
 }
 
 export default TagBox

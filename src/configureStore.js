@@ -5,18 +5,17 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from './reducers'
 
-/**
- * Configure the data store for the application.
- * @property {object} preloadedState - the initial state of the app
- */
+let middleware = [thunkMiddleware, routerMiddleware(browserHistory)]
+if (process.env.NODE_ENV !== 'production') {
+    middleware = [...middleware, createLogger()]
+}
+
 const configureStore = (preloadedState) => {
     return createStore(
         rootReducer, 
         preloadedState,
         applyMiddleware(
-            thunkMiddleware,
-            routerMiddleware(browserHistory),
-            createLogger()
+            ...middleware
         )
     )
 }

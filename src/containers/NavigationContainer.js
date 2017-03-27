@@ -1,27 +1,16 @@
 import { connect } from 'react-redux'
 import Navigation from '../components/Navigation'
-import { toggleTag, selectArticle } from '../actions'
-
-const debug = require('debug')('web:containers:NavigationContainer')
-
-const onTagClick = (dispatch, name) => {
-    debug(`tag ${name} clicked`)
-    dispatch(toggleTag(name))
-}
-
-const onArticleClick = (dispatch, slug) => {
-    debug(`card ${slug} clicked`)
-    dispatch(selectArticle(slug))
-}
+import { toggleTag, clearTags } from '../actions'
+import { push } from 'react-router-redux'
 
 const mapDispatchToProps = (dispatch) => ({
-    onTagClick: name => onTagClick(dispatch, name),
-    onArticleClick: slug => onArticleClick(dispatch, slug)
+    toggleTag: tag => dispatch(toggleTag(tag)),
+    clearTags: () => dispatch(clearTags()),
+    pushArticle: slug => dispatch(push(`/${slug}`))
 })
 
 const mapStateToProps = (state) => ({
-    tags: state.tags.tags,
-    selectedTags: state.selectedTags
+    tags: state.tags.tags
 })
 
 const NavigationContainer = connect(

@@ -1,49 +1,59 @@
 import React, { Component, PropTypes } from 'react'
 import ArticleView from '../components/ArticleView'
 import { connect } from 'react-redux'
-import { selectTag, requestArticleContent, fetchArticleContent } from '../actions'
-
-const debug = require('debug')('web:containers:ArticleViewContainer')
+import { toggleTag, requestArticle, fetchArticle } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
     routeSlug: ownProps.params.slug,
-    article: state.selectedArticle
+    isFetching: state.selectedArticle.isFetching,
+    selectedArticle: state.selectedArticle.selectedArticle
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    onTagClick: tagName => dispatch(selectTag(tagName)),
-    requestArticleContent: slug => dispatch(requestArticleContent(slug)),
-    fetchArticleContent: slug => dispatch(fetchArticleContent(slug))
+    toggleTag: tagName => dispatch(toggleTag(tagName)),
+    requestArticle: slug => dispatch(requestArticle(slug)),
+    fetchArticle: slug => dispatch(fetchArticle(slug))
 })
 
 class ArticleViewContainer extends Component {
     componentDidMount() {
-        const { requestArticleContent, fetchArticleContent, routeSlug } = this.props
-        debug(`Requesting article content:${routeSlug}`)
-        requestArticleContent(routeSlug)
-        fetchArticleContent(routeSlug)
+        const { 
+            requestArticle, fetchArticle, 
+            routeSlug 
+        } = this.props
+        requestArticle(routeSlug)
+        fetchArticle(routeSlug)
+    }
+    componentWillReceiveProps(nextProps) {
+        const { routeSlug } = nextProps
+        const { 
+            requestArticle, fetchArticle,
+            selectedArticle
+        } = this.props
+        if (selectedArticle.slug !== routeSlug) {
+            requestArticle(routeSlug)
+            fetchArticle(routeSlug)
+        }
     }
     render() {
-        const { onTagClick, article } = this.props
-        const { isFetching } = article.content
-        return (
-            <div>
-                { !isFetching && 
-                    <ArticleView 
-                        article={article} 
-                        onTagClick={onTagClick} />
-                }
-            </div>
+        const { isFetching, toggleTag, selectedArticle } = this.props
+        return ( 
+            <ArticleView 
+                isFetching={isFetching}
+                article={selectedArticle}
+                toggleTag={toggleTag} />
+
         )
     }
 }
 
 ArticleViewContainer.propTypes = {
     routeSlug: PropTypes.string.isRequired,
-    article: PropTypes.object.isRequired,
-    onTagClick: PropTypes.func.isRequired,
-    requestCardDetail: PropTypes.func.isRequired,
-    fetchArticleContent: PropTypes.func.isRequired
+    isFetching: PropTypes.bool.isRequired,
+    selectedArticle: PropTypes.object.isRequired,
+    toggleTag: PropTypes.func.isRequired,
+    requestArticle: PropTypes.func.isRequired,
+    fetchArticle: PropTypes.func.isRequired
 }
 
 export default connect(

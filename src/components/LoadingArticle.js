@@ -1,16 +1,15 @@
 import React from 'react'
+import Paper from './Paper'
+import '../styles/LoadingArticle.css'
 
 const LoadingArticle = () => (
-    <div className="Article col s12">
-        <div className="z-depth-2">
-            <p className="title"></p>
-            <p className="content"></p>
-            <p className="content"></p>
-            <p className="content"></p>
-            <p className="content"></p>
-            <p className="content"></p>
+    <Paper>
+        <div className="LoadingArticle">
+            <span className="title" />
+            <span className="content" />
+            <span className="content" />
         </div>
-    </div>
+    </Paper>
 )
 
 export default LoadingArticle

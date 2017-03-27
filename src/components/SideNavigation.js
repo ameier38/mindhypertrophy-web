@@ -1,38 +1,17 @@
 import React, { PropTypes } from 'react'
-import NavigationIcon from './NavigationIcon'
+import NavigationBar from './NavigationBar'
 import '../styles/SideNavigation.css'
 
-const SideNavigation = ({ onFindClick, onArticleClick, onTagClick }) => (
+const SideNavigation = (props) => (
     <div className="SideNavigation hide-on-med-and-down">
-        <div className="icon-container">
-            <NavigationIcon 
-                iconName="home" 
-                label="Home" 
-                onClick={() => onTagClick("All")} />
-            <NavigationIcon 
-                iconName="update" 
-                label="New" 
-                onClick={() => onTagClick("New")} />
-            <NavigationIcon 
-                iconName="find_in_page" 
-                label="Find" 
-                onClick={onFindClick} />
-            <NavigationIcon 
-                iconName="info" 
-                label="About" 
-                onClick={() => onArticleClick("about")} />
-            <NavigationIcon 
-                iconName="message" 
-                label="Contact" 
-                onClick={() => onArticleClick("contact")} />
-        </div>
+        <NavigationBar {...props} />
     </div>
 )
 
 SideNavigation.propTypes = {
     onFindClick: PropTypes.func.isRequired,
-    onArticleClick: PropTypes.func.isRequired,
-    onTagClick: PropTypes.func.isRequired
+    pushArticle: PropTypes.func.isRequired,
+    clearTags: PropTypes.func.isRequired
 }
 
 export default SideNavigation

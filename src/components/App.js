@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import NavigationContainer from '../containers/NavigationContainer'
+import '../styles/App.css'
 
 const App = ({ children }) => (
     <div className="App">

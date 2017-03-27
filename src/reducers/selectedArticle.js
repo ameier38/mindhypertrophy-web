@@ -1,41 +1,28 @@
-import { SELECT_ARTICLE, REQUEST_ARTICLE_CONTENT, RECEIVE_ARTICLE_CONTENT } from '../actions'
+import { SELECT_ARTICLE, REQUEST_ARTICLE, RECEIVE_ARTICLE } from '../actions'
 
-const defaultState = {
-    id: null,
-    slug: "",
-    createdDate: "",
-    imageUrl: "",
-    title: "",
-    summary: "",
-    content: {
-        isFetching: null,
-        requestedAt: "",
-        receivedAt: "",
+const defaultSelectedArticle = {
+    isFetching: true,
+    requestedAt: null,
+    receivedAt: null,
+    selectedArticle: {
+        id: "",
+        slug: "",
+        createdDate: "",
+        imageUrl: "",
+        title: "",
+        summary: "",
+        tags: [],
         markdown: ""
-    },
-    tags: []
+    }
 }
 
-/**
- * Reducer for content portion of
- * selectedArticle state
- * @param {object} state 
- * @param {object} action 
- */
-const contentReducer = (state, action) => {
+const articleReducer = (state, action) => {
     switch (action.type) {
-        case REQUEST_ARTICLE_CONTENT:
+        case SELECT_ARTICLE:
+        case RECEIVE_ARTICLE:
             return {
                 ...state,
-                isFetching: true,
-                requestedAt: action.requestedAt
-            }
-        case RECEIVE_ARTICLE_CONTENT:
-            return {
-                ...state,
-                isFetching: false,
-                receivedAt: action.receivedAt,
-                markdown: action.markdown
+                ...action.selectedArticle
             }
         default:
             return state
@@ -47,18 +34,25 @@ const contentReducer = (state, action) => {
  * @property {string} state - currently selected Article
  * @property {object} action - action object
  */
-const selectedArticle = (state = defaultState, action) => {
+const selectedArticle = (state = defaultSelectedArticle, action) => {
     switch (action.type) {
         case SELECT_ARTICLE:
             return {
                 ...state,
-                ...action.article
+                selectedArticle: articleReducer(state.selectedArticle, action)
             }
-        case REQUEST_ARTICLE_CONTENT:
-        case RECEIVE_ARTICLE_CONTENT:
+        case REQUEST_ARTICLE:
             return {
                 ...state,
-                content: contentReducer(state.content, action)
+                isFetching: true,
+                requestedAt: action.requestedAt
+            }
+        case RECEIVE_ARTICLE:
+            return {
+                ...state,
+                isFetching: false,
+                receivedAt: action.receivedAt,
+                selectedArticle: articleReducer(state.selectedArticle, action)
             }
         default:
             return state

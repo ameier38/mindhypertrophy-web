@@ -3,14 +3,13 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from '../configureStore'
-import initialState from '../initialState.json'
 import App from '../components/App'
 import ArticleCardViewContainer from '../containers/ArticleCardViewContainer'
 import ArticleViewContainer from '../containers/ArticleViewContainer'
 import NotFound from '../components/NotFound'
 import { fetchAllArticles, fetchAllTags } from '../actions'
 
-const store = configureStore(initialState)
+const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
 store.dispatch(fetchAllArticles())
