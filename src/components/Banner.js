@@ -10,8 +10,8 @@ const Banner = ({ imageUrl, logo, title, description }) => {
                     {logo && <img src={logo} role="presentation" /> }
                 </div>
                 <div className="flex-item">
-                    <h2>{title}</h2>
-                    <h4>{description}</h4>
+                    <h1>{title}</h1>
+                    <h2>{description}</h2>
                 </div>
             </div>
         </div>
