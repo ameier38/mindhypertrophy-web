@@ -1,15 +1,13 @@
-// based on react-remarkable
-// https://github.com/acdlite/react-remarkable
-
 import React, { Component } from 'react'
 import MarkdownIt from 'markdown-it'
 import katex from 'markdown-it-katex'
 import hljs from 'highlight.js'
+import '../styles/Markdown.css'
 
 class Markdown extends Component{
   render() {
     return (
-      <div>
+      <div className="Markdown">
         {this.content()}
       </div>
     )
