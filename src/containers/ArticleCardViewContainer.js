@@ -3,8 +3,11 @@ import ArticleCardView from '../components/ArticleCardView'
 import { selectArticle } from '../actions'
 
 const getVisibleArticles = (articles, selectedTags) => {
+    const filteredArticles = articles.filter(article => {
+        return !['contact', 'about'].includes(article.slug)
+    })
     if (selectedTags.length === 0) {
-        return articles.map(article => ({
+        return filteredArticles.map(article => ({
             ...article,
             tags: article.tags.map(tag => ({
                 ...tag,
@@ -13,7 +16,7 @@ const getVisibleArticles = (articles, selectedTags) => {
         }))
     }
     else {
-        const updatedArticles = articles.map(article => ({
+        const updatedArticles = filteredArticles.map(article => ({
             ...article,
             tags: article.tags.map(tag => ({
                 ...tag,
